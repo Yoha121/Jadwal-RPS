@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadwal RPS - SMKN 1 Punggelan</title>
+    <meta name="description"
+        content="Website Jadwal Ruang Praktik Siswa (SIJA) SMKN 1 Punggelan dengan desain premium.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#teacher">Jadwal Guru</a></li>
+            <li><a href="#master-schedule">Jadwal Lengkap</a></li>
+            <li><a href="#room">Jadwal Ruang</a></li>
+            <li><a href="#teacher-profile">Daftar Guru</a></li>
+            <li class="separator">|</li>
+            <li><button id="darkModeToggle" aria-label="Toggle Dark Mode"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Header removed as requested to match 3-section sketch -->
+        <!-- Hero Section -->
+        <section class="hero-section" id="home">
+            <div class="slider-wrapper">
+                <div class="slides" id="mainSlider">
+                    <!-- Slides injected by JS -->
+                </div>
+                <div class="hero-overlay">
+                    <div class="hero-content">
+                        <div class="title-block">
+                            <!-- New Live Time Widget -->
+                            <div id="liveTimeWidget" class="live-time-pill date-animate">
+                                <span id="greetingText">Halo!</span> • <span id="clockText">--:--</span>
+                            </div>
+
+                            <h1 class="animate-text">JADWAL<br><span class="highlight">RPS SIJA</span></h1>
+                            <p class="animate-text delay-1">SMKN 1 Punggelan</p>
+
+                            <!-- Search Bar -->
+                            <div class="search-container animate-text delay-2">
+                                <i class="fas fa-search search-icon"></i>
+                                <input type="text" id="globalSearch" placeholder="Cari Guru atau Ruangan...">
+                            </div>
+                        </div>
+                        <div class="hero-logo animate-text delay-2">
+                            <img id="schoolLogo" alt="SMKN 1 Punggelan Logo">
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-indicators">
+                    <span class="active">01</span>
+                    <span>02</span>
+                    <span>03</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Master Schedule Section (Dynamic) -->
+        <section class="schedule-section" id="master-schedule">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2 class="section-title">Jadwal Pelajaran Lengkap</h2>
+                    <div class="controls-group">
+                        <div class="tab-switcher" id="dayTabs">
+                            <button class="tab-btn active" data-day="Senin">Senin</button>
+                            <button class="tab-btn" data-day="Selasa">Selasa</button>
+                            <button class="tab-btn" data-day="Rabu">Rabu</button>
+                            <button class="tab-btn" data-day="Kamis">Kamis</button>
+                            <button class="tab-btn" data-day="Jumat">Jumat</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="master-schedule-wrapper">
+                    <!-- Header Row -->
+                    <div class="schedule-grid-header">
+                        <div class="grid-header-cell time-col">Jam</div>
+                        <div class="grid-header-cell">R.Coding</div>
+                        <div class="grid-header-cell">R.Jaringan</div>
+                        <div class="grid-header-cell">R.SIoT</div>
+                        <div class="grid-header-cell">RPS 1</div>
+                        <div class="grid-header-cell">RPS 2</div>
+                        <div class="grid-header-cell">Laptop</div>
+                    </div>
+                    <!-- Body Grid -->
+                    <div class="schedule-grid-body" id="masterScheduleGrid">
+                        <!-- Content Injected by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search Results Section -->
+        <section class="schedule-section" id="search-result-section" style="display: none;">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2 class="section-title">Hasil Pencarian</h2>
+                </div>
+                <!-- Controls for search results could go here if needed -->
+                <div class="cards-grid" id="searchResults">
+                    <!-- Search Results injected here -->
+                </div>
+                <div id="noResults" style="display:none; text-align:center; padding: 20px; color: var(--text-muted);">
+                    <p>Tidak ditemukan hasil yang sesuai.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Jadwal Guru Section -->
+        <section class="schedule-section" id="teacher">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2 class="section-title">Jadwal Guru</h2>
+                    <div class="controls-group">
+
+                        <div class="custom-select-wrapper">
+                            <select id="teacherSelect">
+                                <option value="Syaifudin Aji Negara S.pd, Gr">Syaifudin Aji Negara S.pd, Gr</option>
+                                <option value="Sri Herawan Kusuma S.Kom">Sri Herawan Kusuma S.Kom</option>
+                                <option value="Hermanto S.Pd">Hermanto S.Pd</option>
+                                <option value="Idiarso S.Kom">Idiarso S.Kom</option>
+                                <option value="Eko Santoso S.Pd">Eko Santoso S.Pd</option>
+                                <option value="Sidik Nurcahyo S.Pd">Sidik Nurcahyo S.Pd</option>
+                                <option value="Kuntoro Triatmoko S.Kom">Kuntoro Triatmoko S.Kom</option>
+                                <option value="Gunawan Wibisono S.Kom">Gunawan Wibisono S.Kom</option>
+                                <option value="Kiat Uji Purwani S.Kom">Kiat Uji Purwani S.Kom</option>
+                                <option value="Endah Yuliani S.Pd">Endah Yuliani S.Pd</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="master-schedule-wrapper">
+                    <div class="schedule-grid-header" id="teacherGridHeader">
+                        <div class="grid-header-cell time-col">Jam</div>
+                        <div class="grid-header-cell">Senin</div>
+                        <div class="grid-header-cell">Selasa</div>
+                        <div class="grid-header-cell">Rabu</div>
+                        <div class="grid-header-cell">Kamis</div>
+                        <div class="grid-header-cell">Jumat</div>
+                    </div>
+                    <div class="schedule-grid-body" id="teacherScheduleGrid">
+                        <!-- Content Injected by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Jadwal Ruang Section -->
+        <section class="schedule-section" id="room">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2 class="section-title">Jadwal Ruang Praktik</h2>
+                    <div class="controls-group">
+                        <div class="custom-select-wrapper">
+                            <select id="roomSelect">
+                                <option value="R.Coding">Ruang Coding</option>
+                                <option value="R.Jaringan">Ruang Jaringan</option>
+                                <option value="R.SIoT">Ruang SIoT</option>
+                                <option value="RPS 1">RPS 1</option>
+                                <option value="RPS 2">RPS 2</option>
+                                <option value="Laptop">Lab Laptop</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="master-schedule-wrapper">
+                    <div class="schedule-grid-header" id="roomGridHeader">
+                        <div class="grid-header-cell time-col">Jam</div>
+                        <div class="grid-header-cell">Senin</div>
+                        <div class="grid-header-cell">Selasa</div>
+                        <div class="grid-header-cell">Rabu</div>
+                        <div class="grid-header-cell">Kamis</div>
+                        <div class="grid-header-cell">Jumat</div>
+                    </div>
+                    <div class="schedule-grid-body" id="roomScheduleGrid">
+                        <!-- Room Schedule Injected Here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profil Guru Section -->
+        <section class="schedule-section" id="teacher-profile">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2 class="section-title">Daftar Guru SIJA</h2>
+                </div>
+                <div class="profile-grid" id="teacherProfileGrid">
+                    <!-- Profiles injected by JS -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <div class="lightbox-wrapper">
+            <img class="lightbox-content" id="lightbox-img">
+            <a id="downloadBtn" class="download-btn" download>
+                <i class="fas fa-download"></i> Simpan Jadwal
+            </a>
+        </div>
+        <div id="caption"></div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <!-- Brand / Copyright -->
+            <div class="footer-column">
+                <div class="footer-logo">
+                    <i class="fas fa-school"></i>
+                    <span>SMKN 1 Punggelan</span>
+                </div>
+                <p class="footer-desc">Sistem Informatika, Jaringan, dan Aplikasi</p>
+                <p class="copyright">&copy; 2026 SIJA - All rights reserved.</p>
+            </div>
+
+            <!-- School Links -->
+            <div class="footer-column">
+                <h4>Info Sekolah</h4>
+                <ul class="footer-links">
+                    <li><a href="https://smkn1punggelan.sch.id" target="_blank"><i class="fas fa-globe"></i> Website
+                            Resmi</a></li>
+                    <li><a href="https://www.instagram.com/smkn1punggelan_official/" target="_blank"><i
+                                class="fab fa-instagram"></i> Instagram SIJA</a></li>
+                </ul>
+            </div>
+
+            <!-- Credits -->
+            <div class="footer-column">
+                <h4>Developed By</h4>
+                <div class="creator-list">
+                    <a href="" target="_blank" class="creator-badge">
+                        <i class="fab fa-github"></i> Yoga Prastio
+                    </a>
+                    <a href="" target="_blank" class="creator-badge">
+                        <i class="fab fa-github"></i> Dewi Nur Riski
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="data_jadwal.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
